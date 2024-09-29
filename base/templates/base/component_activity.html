@@ -1,0 +1,31 @@
+<div class="activities">
+  <div class="activities__header">
+    <h2>Recent Activities</h2>
+  </div>
+  {% for conversation in conversations %}
+  <div class="activities__box">
+    <div class="activities__boxHeader roomListRoom__header">
+      <a
+        href="{% url 'user_profile' conversation.user.id %}"
+        class="roomListRoom__author"
+      >
+        <div class="avatar avatar--small">
+          <img src="{{conversation.user.profile.profile_pic.url}}" />
+        </div>
+        <p>
+          @{{conversation.user}}
+          <span>{{conversation.created_at|timesince}} ago</span>
+        </p>
+      </a>
+    </div>
+    <div class="activities__boxContent">
+      <p>
+        replied to post “<a href="{% url 'rooms' conversation.room.id %}"
+          >{{conversation.room}}</a
+        >”
+      </p>
+      <div class="activities__boxRoomContent">{{conversation}}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
